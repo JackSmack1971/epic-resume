@@ -768,6 +768,168 @@
                 background: rgba(15, 23, 42, 0.3);
             }
         }
+
+        /* Desktop Enhancement Features - Add to your existing CSS */
+
+        /* Desktop-specific optimizations */
+        @media (min-width: 1024px) {
+            /* Enhanced glassmorphism for desktop (more blur, stronger effects) */
+            .glass-card {
+                backdrop-filter: blur(24px) saturate(200%);
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+
+            /* More sophisticated hover effects for desktop */
+            .glass-card:hover {
+                transform: translateY(-15px) scale(1.02) rotateX(2deg);
+                box-shadow: 0 25px 50px 0 rgba(31, 38, 135, 0.6);
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            /* Desktop navigation enhancements */
+            .nav {
+                backdrop-filter: blur(20px) saturate(180%);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: 0 8px 32px rgba(31, 38, 135, 0.4);
+            }
+
+            /* Advanced parallax effect for desktop */
+            .parallax-container {
+                perspective: 1000px;
+                transform-style: preserve-3d;
+            }
+
+            /* Multi-column layouts for larger screens */
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+
+            /* Desktop-specific animations */
+            .timeline-item::before {
+                transition: all 0.3s ease;
+            }
+
+            .timeline-item:hover::before {
+                transform: scale(1.5);
+                box-shadow: 0 0 20px var(--primary);
+            }
+        }
+
+        /* Ultra-wide screen optimizations (1440px+) */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1400px;
+                padding: 3rem 4rem;
+            }
+
+            /* Side-by-side layouts for ultra-wide */
+            .hero-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 4rem;
+                align-items: center;
+            }
+
+            /* Enhanced spacing for large screens */
+            .glass-card {
+                padding: 4rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        /* Desktop keyboard navigation enhancements */
+        @media (min-width: 768px) {
+            .nav-btn:focus,
+            .theme-toggle:focus,
+            .fab:focus {
+                outline: 2px solid var(--primary);
+                outline-offset: 2px;
+                box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            }
+
+            /* Keyboard shortcuts indicators */
+            .nav-btn::after {
+                content: attr(data-shortcut);
+                position: absolute;
+                top: -2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--bg-primary);
+                color: var(--text-primary);
+                padding: 0.25rem 0.5rem;
+                border-radius: 0.25rem;
+                font-size: 0.75rem;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+                pointer-events: none;
+            }
+
+            .nav-btn:hover::after {
+                opacity: 1;
+            }
+        }
+
+        /* High refresh rate display optimizations */
+        @media (min-resolution: 120dpi) {
+            * {
+                animation-duration: calc(var(--animation-duration, 1s) * 0.8);
+            }
+
+            .glass-card, .nav, .particle {
+                will-change: transform, opacity;
+            }
+        }
+
+        /* Desktop-specific performance optimizations */
+        @media (min-width: 1024px) {
+            /* More particles for desktop */
+            .particles {
+                opacity: 1;
+            }
+
+            /* Enable more complex animations on desktop */
+            .skill-progress {
+                background: linear-gradient(
+                    90deg,
+                    var(--primary) 0%,
+                    var(--accent) 50%,
+                    var(--primary) 100%
+                );
+                background-size: 200% 100%;
+                animation: skillShimmer 3s infinite linear;
+            }
+
+            @keyframes skillShimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+        }
+
+        /* Desktop cursor enhancements */
+        @media (min-width: 768px) {
+            .glass-card {
+                cursor: grab;
+            }
+
+            .glass-card:active {
+                cursor: grabbing;
+            }
+
+            .nav-btn, .theme-toggle, .fab {
+                cursor: pointer;
+            }
+
+            .contact-item:hover {
+                cursor: pointer;
+            }
+        }
     </style>
 </head>
 <body data-theme="light">
