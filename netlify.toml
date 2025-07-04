@@ -1,175 +1,55 @@
-# Production Netlify Configuration for Epic Resume
-# Site: https://phenomenal-halva-379d04.netlify.app/
-# Repository: https://github.com/JackSmack1971/epic-resume
+# Corrected Netlify Configuration for Epic Resume
+# Fixed: Removed Python dependency installation trigger
+# Fixed: Corrected build command
 
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "npm run build"  # Changed from "npm run build:production"
 
-# Environment variables for build optimization
+# Environment variables
 [build.environment]
   NODE_VERSION = "20"
   NPM_VERSION = "10"
-  NODE_ENV = "production"
 
-# SPA Redirect - Critical for proper routing
+# SPA Redirect - Essential for single page application
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Enhanced Security Headers for Production
+# Basic Security Headers
 [[headers]]
   for = "/*"
   [headers.values]
-    # Content Security Policy - Updated for production
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: blob:; connect-src 'self' https://phenomenal-halva-379d04.netlify.app; frame-ancestors 'none'; upgrade-insecure-requests;"
-    
-    # Security Headers
-    X-Frame-Options = "DENY"
+    X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=(), interest-cohort=()"
-    
-    # HSTS for HTTPS enforcement
-    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
-    
-    # Performance headers
-    X-DNS-Prefetch-Control = "on"
 
-# Cache optimization for static assets
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    X-Content-Type-Options = "nosniff"
-
+# Cache optimization for assets
 [[headers]]
   for = "*.html"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
-    X-Content-Type-Options = "nosniff"
 
 [[headers]]
   for = "*.css"
   [headers.values]
     Cache-Control = "public, max-age=604800"
-    X-Content-Type-Options = "nosniff"
 
 [[headers]]
   for = "*.js"
   [headers.values]
     Cache-Control = "public, max-age=604800"
-    X-Content-Type-Options = "nosniff"
 
-# PWA specific headers
+# PWA Headers
 [[headers]]
   for = "/manifest.json"
   [headers.values]
     Content-Type = "application/manifest+json"
-    Cache-Control = "public, max-age=86400"
-    Access-Control-Allow-Origin = "https://phenomenal-halva-379d04.netlify.app"
 
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-    Service-Worker-Allowed = "/"
-
-# Image optimization headers
-[[headers]]
-  for = "*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-    Vary = "Accept"
-
-[[headers]]
-  for = "*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-    Vary = "Accept"
-
-[[headers]]
-  for = "*.webp"
-  [headers.values]
-    Cache-Control = "public, max-age=2592000"
-    Vary = "Accept"
-
-# Font optimization
-[[headers]]
-  for = "*.woff2"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    Access-Control-Allow-Origin = "*"
-
-# Favicon and icons
-[[headers]]
-  for = "/favicon.ico"
-  [headers.values]
-    Cache-Control = "public, max-age=86400"
-
-# Error page redirects
+# Error handling
 [[redirects]]
   from = "/404"
   to = "/index.html"
   status = 404
-
-[[redirects]]
-  from = "/500"
-  to = "/index.html"
-  status = 500
-
-# Plugin configuration for optimization
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-  [plugins.inputs]
-    audit_url = "https://phenomenal-halva-379d04.netlify.app/"
-    
-[[plugins]]
-  package = "netlify-plugin-minify-html"
-  [plugins.inputs]
-    contexts = ["production"]
-
-# Build optimization
-[[plugins]]
-  package = "netlify-plugin-submit-sitemap"
-  [plugins.inputs]
-    baseUrl = "https://phenomenal-halva-379d04.netlify.app"
-    sitemapPath = "/sitemap.xml"
-    ignorePeriod = 0
-    providers = [
-      "google",
-      "bing"
-    ]
-
-# Context-specific configurations
-[context.production]
-  command = "npm run build:production"
-  
-[context.deploy-preview]
-  command = "npm run build"
-  
-[context.branch-deploy]
-  command = "npm run build"
-
-# Development context (for local testing)
-[context.dev]
-  command = "npm run dev"
-
-# Functions directory (for future serverless functions)
-[functions]
-  directory = "netlify/functions"
-
-# REMOVED: Edge functions section that was causing the syntax error
-# Edge functions can be added later when needed with proper syntax:
-# [[edge_functions]]
-#   path = "/api/*"
-#   function = "api-handler"
-
-# Custom domain configuration (uncomment when ready)
-# [[redirects]]
-#   from = "https://www.eliusvaughn.com/*"
-#   to = "https://eliusvaughn.com/:splat"
-#   status = 301
-#   force = true
