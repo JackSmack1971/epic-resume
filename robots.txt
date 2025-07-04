@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location (optional - Netlify can auto-generate)
-Sitemap: https://your-epic-resume.netlify.app/sitemap.xml
+Sitemap: https://68685f8907d2f3725a882fda--phenomenal-halva-379d04.netlify.app/sitemap.xml
 
 # Block specific paths if needed (currently allowing all)
 # Disallow: /private/
