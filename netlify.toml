@@ -1,4 +1,4 @@
-# Netlify configuration for epic resume
+# Netlify configuration for epic resume :)
 [build]
   publish = "."
 
