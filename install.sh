@@ -82,25 +82,48 @@ print_success "Yarn $YARN_VERSION installed successfully!"
 
 # Install global npm packages for development
 print_step "Installing global development tools..."
-npm install -g \
-    @vite/create-app \
-    vite \
-    serve \
-    http-server \
-    live-server \
-    nodemon \
-    pm2 \
-    lighthouse \
-    @storybook/cli \
-    eslint \
-    prettier \
-    typescript \
-    @types/node \
-    concurrently \
-    rimraf \
-    cross-env
 
-print_success "Global development tools installed!"
+# Clear npm cache to avoid issues
+npm cache clean --force
+
+# Set npm configuration for better performance
+npm config set audit-level high
+npm config set fund false
+npm config set update-notifier false
+
+# Install packages one by one with error handling for better debugging
+print_step "Installing essential build tools..."
+npm install -g vite@latest || print_warning "Vite installation failed, continuing..."
+
+print_step "Installing static servers..."
+npm install -g serve@latest || print_warning "serve installation failed, continuing..."
+npm install -g http-server@latest || print_warning "http-server installation failed, continuing..."
+
+print_step "Installing development utilities..."
+npm install -g nodemon@latest || print_warning "nodemon installation failed, continuing..."
+npm install -g pm2@latest || print_warning "pm2 installation failed, continuing..."
+
+print_step "Installing code quality tools..."
+npm install -g eslint@latest || print_warning "eslint installation failed, continuing..."
+npm install -g prettier@latest || print_warning "prettier installation failed, continuing..."
+
+print_step "Installing TypeScript support..."
+npm install -g typescript@latest || print_warning "typescript installation failed, continuing..."
+
+print_step "Installing utility packages..."
+npm install -g concurrently@latest || print_warning "concurrently installation failed, continuing..."
+npm install -g rimraf@latest || print_warning "rimraf installation failed, continuing..."
+npm install -g cross-env@latest || print_warning "cross-env installation failed, continuing..."
+
+print_step "Installing performance audit tools..."
+npm install -g lighthouse@latest || print_warning "lighthouse installation failed, continuing..."
+
+# Verify installations
+print_step "Verifying global package installations..."
+echo "📦 Installed packages:"
+npm list -g --depth=0 2>/dev/null | grep -E "(vite|serve|eslint|prettier|typescript|lighthouse)" || echo "Some packages may not have installed correctly"
+
+print_success "Global development tools installation completed!"
 
 # Install VS Code Server (for container development)
 print_step "Installing Visual Studio Code Server..."
