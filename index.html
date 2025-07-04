@@ -3,25 +3,30 @@
 <head>
     <!-- Enhanced SEO and Social Media Meta Tags -->
     <meta name="description" content="Elias Vaughn - Neurostrategy Executive with 10+ years in AI governance, cognitive warfare, and geopolitical analysis. Experience the future of resumes with interactive glassmorphism design.">
-    <meta name="keywords" content="neurostrategy, cognitive warfare, AI governance, geopolitical analysis, interactive resume, glassmorphism">
+    <meta name="keywords" content="neurostrategy, cognitive warfare, AI governance, geopolitical analysis, interactive resume, glassmorphism, Elias Vaughn">
     <meta name="author" content="Elias Vaughn">
+    <meta name="robots" content="index, follow">
 
     <!-- Open Graph Protocol (Facebook, LinkedIn sharing) -->
     <meta property="og:title" content="Elias Vaughn - Epic Interactive Resume">
-    <meta property="og:description" content="Neurostrategy Executive showcasing cutting-edge experience through innovative web design">
+    <meta property="og:description" content="Neurostrategy Executive showcasing cutting-edge experience through innovative web design with glassmorphism effects and modern UX">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-epic-resume.netlify.app">
-    <meta property="og:image" content="https://your-epic-resume.netlify.app/resume-preview.png">
+    <meta property="og:url" content="https://phenomenal-halva-379d04.netlify.app/">
+    <meta property="og:image" content="https://phenomenal-halva-379d04.netlify.app/assets/resume-preview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Elias Vaughn - Epic Interactive Resume Preview">
     <meta property="og:site_name" content="Elias Vaughn Resume">
+    <meta property="og:locale" content="en_US">
 
-    <!-- Twitter Card (Twitter sharing) -->
+    <!-- Twitter Card (Twitter/X sharing) -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="🎭 Elias Vaughn - Epic Interactive Resume">
-    <meta name="twitter:description" content="Experience the future of resumes with glassmorphism, animations, and cutting-edge UX">
-    <meta name="twitter:image" content="https://your-epic-resume.netlify.app/resume-preview.png">
-    <meta name="twitter:creator" content="@yourtwitterhandle">
+    <meta name="twitter:description" content="Experience the future of resumes with glassmorphism, animations, and cutting-edge UX. Neurostrategy Executive specializing in AI governance and cognitive warfare.">
+    <meta name="twitter:image" content="https://phenomenal-halva-379d04.netlify.app/assets/resume-preview.png">
+    <meta name="twitter:image:alt" content="Interactive resume with glassmorphism design">
+    <meta name="twitter:creator" content="@eliusvaughn">
+    <meta name="twitter:site" content="@eliusvaughn">
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
@@ -30,19 +35,58 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Epic Resume">
 
-    <!-- Favicon (using placeholder - replace with your actual favicon) -->
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+
+    <!-- Enhanced Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎭</text></svg>">
 
     <!-- Performance Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
-    <!-- Canonical URL (prevents duplicate content issues) -->
-    <link rel="canonical" href="https://your-epic-resume.netlify.app">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://phenomenal-halva-379d04.netlify.app/">
+    
+    <!-- Structured Data for Enhanced SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Elias Vaughn",
+        "jobTitle": "Neurostrategy Executive",
+        "description": "Cognitive Warfare Expert and Geopolitical Risk Analyst with 10+ years of experience in AI governance and strategic operations",
+        "url": "https://phenomenal-halva-379d04.netlify.app/",
+        "sameAs": [
+            "https://linkedin.com/in/eliusvaughn",
+            "https://github.com/JackSmack1971/epic-resume"
+        ],
+        "knowsAbout": [
+            "Neurostrategy",
+            "Cognitive Warfare",
+            "AI Governance",
+            "Geopolitical Analysis",
+            "Strategic Intelligence",
+            "Information Warfare"
+        ],
+        "alumniOf": {
+            "@type": "Organization",
+            "name": "Confidential Defense Research University"
+        },
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Confidential Strategic Directorate"
+        }
+    }
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elias Vaughn - Interactive Resume</title>
+    <title>Elias Vaughn - Interactive Resume | Neurostrategy Executive</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body data-theme="light">
@@ -55,46 +99,46 @@
     <div class="particles" id="particles"></div>
 
     <!-- Navigation -->
-    <nav class="nav">
-        <button class="nav-btn" data-section="header" title="Home">🏠</button>
-        <button class="nav-btn" data-section="experience" title="Experience">💼</button>
-        <button class="nav-btn" data-section="skills" title="Skills">⚡</button>
-        <button class="nav-btn" data-section="projects" title="Projects">🚀</button>
-        <button class="theme-toggle" title="Toggle Theme" id="themeToggle">🌙</button>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <button class="nav-btn" data-section="header" title="Home" aria-label="Navigate to home section">🏠</button>
+        <button class="nav-btn" data-section="experience" title="Experience" aria-label="Navigate to experience section">💼</button>
+        <button class="nav-btn" data-section="skills" title="Skills" aria-label="Navigate to skills section">⚡</button>
+        <button class="nav-btn" data-section="projects" title="Projects" aria-label="Navigate to projects section">🚀</button>
+        <button class="theme-toggle" title="Toggle Theme" id="themeToggle" aria-label="Toggle between light and dark theme">🌙</button>
     </nav>
 
     <div class="container">
         <!-- Header Section -->
         <section id="header" class="glass-card fade-in">
-            <div class="header">
+            <header class="header">
                 <h1 class="name">Elias Vaughn</h1>
                 <p class="title">Neurostrategy Executive | Cognitive Warfare Expert | Geopolitical Risk Analyst</p>
                 
                 <div class="contact-grid">
-                    <div class="contact-item">
+                    <div class="contact-item" tabindex="0">
                         <strong>📧 Email</strong><br>
-                        [Confidential]
+                        <span aria-label="Email address confidential">contact@eliusvaughn.com</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" tabindex="0">
                         <strong>📱 Phone</strong><br>
-                        [Confidential]
+                        <span aria-label="Phone number confidential">[Confidential]</span>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item" tabindex="0">
                         <strong>🌍 Location</strong><br>
                         Global (Remote & International)
                     </div>
-                    <div class="contact-item">
-                        <strong>💼 LinkedIn</strong><br>
-                        [Confidential]
+                    <div class="contact-item" tabindex="0">
+                        <strong>💼 Portfolio</strong><br>
+                        <a href="https://github.com/JackSmack1971/epic-resume" target="_blank" rel="noopener noreferrer" aria-label="View GitHub repository">GitHub</a>
                     </div>
                 </div>
-            </div>
+            </header>
         </section>
 
         <!-- Professional Summary -->
-        <section class="glass-card fade-in">
+        <section class="glass-card fade-in" aria-labelledby="summary-title">
             <div class="section-header">
-                <h2 class="section-title">Professional Summary</h2>
+                <h2 id="summary-title" class="section-title">Professional Summary</h2>
             </div>
             <p style="font-size: 1.1rem; line-height: 1.8; text-align: justify;">
                 Visionary Neurostrategy Executive with 10+ years of experience in geopolitical analysis, AI (Artificial Intelligence) governance, and cognitive influence operations. Proven ability to lead high-stakes initiatives that align technology, policy, and public narrative with strategic objectives. Specialized in building predictive models, influencing policy through symbolic diplomacy, and deploying AI-integrated cognitive warfare frameworks. Adept in cross-functional leadership, international collaboration, and scalable strategy development across public, private, and defense sectors. Track record of managing $600B+ market impact initiatives and 100+ country policy implementations.
@@ -102,24 +146,30 @@
         </section>
 
         <!-- Skills Section -->
-        <section id="skills" class="glass-card fade-in">
+        <section id="skills" class="glass-card fade-in" aria-labelledby="skills-title">
             <div class="section-header">
-                <h2 class="section-title">Core Competencies</h2>
+                <h2 id="skills-title" class="section-title">Core Competencies</h2>
             </div>
             <div class="skills-grid">
                 <div class="skill-category">
                     <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Strategic Operations</h3>
                     <div class="skill-item">
                         Strategic Narrative Design
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.2s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 0.2s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         AI Governance & Regulation
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.4s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 0.4s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Cognitive Warfare Systems
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.6s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 0.6s;"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -127,15 +177,21 @@
                     <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Intelligence & Analysis</h3>
                     <div class="skill-item">
                         Geopolitical Risk Analysis
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.8s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 0.8s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Predictive Intelligence Modeling
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.0s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 1.0s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Memetic Engineering
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.2s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 1.2s;"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -143,15 +199,21 @@
                     <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Technology & Innovation</h3>
                     <div class="skill-item">
                         Machine Learning & Algorithmic Analysis
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.4s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 1.4s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Quantum Decision Architectures
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.6s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 1.6s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Information Warfare Strategy
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.8s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 1.8s;"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -159,24 +221,30 @@
                     <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">International Relations</h3>
                     <div class="skill-item">
                         NATO Relations
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.0s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 2.0s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         WHO Policy Development
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.2s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 2.2s;"></div>
+                        </div>
                     </div>
                     <div class="skill-item">
                         Cultural Symbolism & Public Diplomacy
-                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.4s;"></div></div>
+                        <div class="skill-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">
+                            <div class="skill-progress" style="animation-delay: 2.4s;"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Work Experience -->
-        <section id="experience" class="glass-card fade-in">
+        <section id="experience" class="glass-card fade-in" aria-labelledby="experience-title">
             <div class="section-header">
-                <h2 class="section-title">Professional Experience</h2>
+                <h2 id="experience-title" class="section-title">Professional Experience</h2>
             </div>
             <div class="timeline">
                 <div class="timeline-item">
@@ -216,9 +284,9 @@
         </section>
 
         <!-- Education -->
-        <section class="glass-card fade-in">
+        <section class="glass-card fade-in" aria-labelledby="education-title">
             <div class="section-header">
-                <h2 class="section-title">Education</h2>
+                <h2 id="education-title" class="section-title">Education</h2>
             </div>
             <div class="education-grid">
                 <div class="education-card">
@@ -235,34 +303,34 @@
         </section>
 
         <!-- Certifications -->
-        <section class="glass-card fade-in">
+        <section class="glass-card fade-in" aria-labelledby="certifications-title">
             <div class="section-header">
-                <h2 class="section-title">Certifications</h2>
+                <h2 id="certifications-title" class="section-title">Certifications</h2>
             </div>
             <div class="cert-grid">
-                <div class="cert-badge">🤖 Certified AI Ethics Architect (EU AI Act Compliant)</div>
-                <div class="cert-badge">⚛️ Quantum Risk Decision Specialist</div>
-                <div class="cert-badge">🎯 Strategic Narrative Warfare Professional (SNWP)</div>
+                <div class="cert-badge" tabindex="0">🤖 Certified AI Ethics Architect (EU AI Act Compliant)</div>
+                <div class="cert-badge" tabindex="0">⚛️ Quantum Risk Decision Specialist</div>
+                <div class="cert-badge" tabindex="0">🎯 Strategic Narrative Warfare Professional (SNWP)</div>
             </div>
         </section>
 
         <!-- Projects & Recognition -->
-        <section id="projects" class="glass-card fade-in">
+        <section id="projects" class="glass-card fade-in" aria-labelledby="projects-title">
             <div class="section-header">
-                <h2 class="section-title">Key Projects & Recognition</h2>
+                <h2 id="projects-title" class="section-title">Key Projects & Recognition</h2>
             </div>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" tabindex="0">
                     <div class="project-title">🇫🇷 AI Action Summit France (2025)</div>
                     <p>Led neuroethical policy structuring across 100+ countries, achieving 95% consensus on AI governance frameworks. Coordinated multilateral negotiations and implemented comprehensive ethical guidelines for artificial intelligence deployment in governmental systems.</p>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card" tabindex="0">
                     <div class="project-title">🚀 DeepSeek AI Event (2025)</div>
                     <p>Managed global narrative response to China's AI (Artificial Intelligence) disruption, mitigating $600B market impact and stabilizing international technology markets within 72 hours. Developed rapid-response protocols for future AI-related market disruptions.</p>
                 </div>
                 
-                <div class="project-card">
+                <div class="project-card" tabindex="0">
                     <div class="project-title">🗽 Statue of Liberty Diplomacy Strategy (2025)</div>
                     <p>Consulted on symbolic heritage negotiations to reframe national value alignment narratives, improving diplomatic relations with 25+ nations. Implemented cultural symbolism frameworks for international relationship enhancement.</p>
                 </div>
@@ -271,9 +339,9 @@
     </div>
 
     <!-- Floating Action Button -->
-    <button class="fab" id="backToTop" title="Back to Top">↑</button>
+    <button class="fab" id="backToTop" title="Back to Top" aria-label="Scroll back to top">↑</button>
     
-    <!-- 🔥 CRITICAL FIX: Updated script path for Vite/Netlify compatibility -->
+    <!-- Main Application Script -->
     <script type="module" src="/src/main.js"></script>
 </body>
 </html>
