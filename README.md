@@ -18,6 +18,12 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 Alternatively, open `index.html` directly in a browser.
 
+## Development dependencies
+
+All optional tooling and utilities are listed in `dev-packages.txt`. This file
+collects Node and system packages used during local development. It is excluded
+from automated Python package installs on Netlify.
+
 ## Deployment
 
 This site can be hosted on services like Netlify or any static file host. The `netlify.toml` configuration is provided for Netlify deploys.
