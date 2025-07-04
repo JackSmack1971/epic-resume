@@ -1,6 +1,7 @@
 # Netlify configuration for epic resume :)
 [build]
-  publish = "."
+  publish = "dist"
+  command = "npm run build"
 
 # Redirect all paths to index.html for SPA behavior
 [[redirects]]
