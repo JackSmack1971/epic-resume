@@ -140,22 +140,57 @@ EOF
 
 print_success "VS Code Server installed and configured!"
 
-# Install useful VS Code extensions
+# Install useful VS Code extensions with error handling
 print_step "Installing VS Code extensions..."
-code-server --install-extension ms-vscode.vscode-typescript-next
-code-server --install-extension bradlc.vscode-tailwindcss
-code-server --install-extension esbenp.prettier-vscode
-code-server --install-extension dbaeumer.vscode-eslint
-code-server --install-extension formulahendry.auto-rename-tag
-code-server --install-extension christian-kohler.path-intellisense
-code-server --install-extension ms-vscode.vscode-json
-code-server --install-extension ritwickdey.liveserver
-code-server --install-extension ms-vscode.vscode-css-peek
-code-server --install-extension bradlc.vscode-tailwindcss
-code-server --install-extension pranaygp.vscode-css-peek
-code-server --install-extension zignd.html-css-class-completion
 
-print_success "VS Code extensions installed!"
+# Essential extensions for Epic Resume development
+ESSENTIAL_EXTENSIONS=(
+    "esbenp.prettier-vscode"              # Code formatting
+    "dbaeumer.vscode-eslint"              # JavaScript/TypeScript linting
+    "ms-vscode.vscode-typescript-next"    # TypeScript support
+    "formulahendry.auto-rename-tag"       # HTML tag auto-rename
+    "christian-kohler.path-intellisense"  # Path completion
+)
+
+# Optional extensions (nice to have)
+OPTIONAL_EXTENSIONS=(
+    "ritwickdey.liveserver"               # Live server
+    "bradlc.vscode-tailwindcss"          # Tailwind CSS support
+    "ms-vscode.vscode-css-peek"          # CSS peek functionality
+)
+
+print_step "Installing essential VS Code extensions..."
+for extension in "${ESSENTIAL_EXTENSIONS[@]}"; do
+    echo "Installing $extension..."
+    if code-server --install-extension "$extension" --force 2>/dev/null; then
+        print_success "$extension installed successfully"
+    else
+        print_warning "$extension installation failed, continuing..."
+    fi
+done
+
+print_step "Installing optional VS Code extensions..."
+for extension in "${OPTIONAL_EXTENSIONS[@]}"; do
+    echo "Installing $extension..."
+    if code-server --install-extension "$extension" --force 2>/dev/null; then
+        print_success "$extension installed successfully"
+    else
+        print_warning "$extension installation failed, skipping..."
+    fi
+done
+
+# Verify installed extensions
+print_step "Verifying installed extensions..."
+INSTALLED_COUNT=$(code-server --list-extensions 2>/dev/null | wc -l)
+if [ "$INSTALLED_COUNT" -gt 0 ]; then
+    print_success "$INSTALLED_COUNT VS Code extensions installed"
+    echo "📦 Installed extensions:"
+    code-server --list-extensions 2>/dev/null | head -10
+else
+    print_warning "No extensions were installed, but VS Code Server is still functional"
+fi
+
+print_success "VS Code extension installation completed!"
 
 # Setup Git configuration (optional - can be customized)
 print_step "Configuring Git (default settings)..."
@@ -166,29 +201,79 @@ git config --global user.email "developer@epicresume.dev"
 
 print_success "Git configured with default settings!"
 
-# Create project directory structure
-print_step "Setting up project workspace..."
-mkdir -p /workspace/epic-resume
+# Create or update package.json with correct dependencies
+print_step "Creating/updating package.json with correct dependencies..."
 cd /workspace/epic-resume
 
-# Clone or initialize project (if not already present)
-if [ ! -f "package.json" ]; then
-    print_warning "No package.json found. Creating sample project structure..."
-    
-    # Create basic project structure
-    mkdir -p src/{styles,components,utils}
-    mkdir -p tests
-    mkdir -p public
-    
-    # Create basic files that would be needed
-    touch src/main.js
-    touch src/styles/style.css
-    touch index.html
-    touch vite.config.js
-    touch .gitignore
-    
-    print_success "Basic project structure created!"
-fi
+# Create package.json if it doesn't exist or update it
+cat > package.json << 'EOF'
+{
+  "name": "epic-resume",
+  "version": "2.0.0",
+  "description": "Epic Interactive Resume for Elias Vaughn - Neurostrategy Executive",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4173",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,html}",
+    "clean": "rimraf node_modules dist .cache && npm install",
+    "lighthouse": "lighthouse http://localhost:4173 --view",
+    "serve": "serve dist",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "resume",
+    "interactive",
+    "glassmorphism",
+    "vite",
+    "pwa",
+    "neurostrategy",
+    "cognitive-warfare",
+    "geopolitical-analysis"
+  ],
+  "author": "Elias Vaughn <contact@epicresume.dev>",
+  "license": "MIT",
+  "dependencies": {
+    "vite": "^4.5.0",
+    "vite-plugin-pwa": "^0.20.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/preset-env": "^7.22.10",
+    "babel-jest": "^29.6.4",
+    "jest": "^29.6.4",
+    "jest-environment-jsdom": "^29.6.4",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0",
+    "@types/jest": "^29.5.5"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/epic-resume.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/epic-resume/issues"
+  },
+  "homepage": "https://your-epic-resume.netlify.app"
+}
+EOF
+
+print_success "package.json created/updated with correct dependencies!"
 
 # Install Chrome for testing (headless)
 print_step "Setting up Chrome for automated testing..."
