@@ -665,6 +665,109 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-dark);
         }
+
+        /* Mobile Touch Optimizations - Add to your existing CSS */
+
+        /* Improve touch targets (minimum 44px as per Apple/Google guidelines) */
+        .nav-btn, .theme-toggle, .fab {
+            min-width: 44px;
+            min-height: 44px;
+            touch-action: manipulation; /* Eliminates 300ms tap delay */
+        }
+
+        /* Optimize scrolling performance on mobile */
+        body {
+            -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
+            overscroll-behavior-y: contain; /* Prevent bounce on iOS */
+        }
+
+        /* Better mobile navigation spacing */
+        @media (max-width: 768px) {
+            .nav {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                backdrop-filter: blur(20px); /* Stronger blur for mobile */
+            }
+
+            .nav-btn {
+                padding: 0.75rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Mobile-specific animations (reduced motion for better performance) */
+        @media (max-width: 768px) {
+            .glass-card {
+                transition: all 0.2s ease; /* Faster transitions on mobile */
+            }
+
+            .glass-card:hover {
+                transform: translateY(-5px); /* Smaller hover effects on mobile */
+            }
+
+            /* Disable complex animations on lower-end devices */
+            @media (prefers-reduced-motion: reduce) {
+                *, *::before, *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+        }
+
+        /* Better mobile typography */
+        @media (max-width: 480px) {
+            .name {
+                font-size: clamp(2.5rem, 12vw, 4rem); /* More aggressive scaling */
+                line-height: 1.1;
+                margin-bottom: 0.5rem;
+            }
+
+            .title {
+                font-size: 1.2rem;
+                line-height: 1.4;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Mobile-optimized particles (fewer for better performance) */
+        @media (max-width: 768px) {
+            .particle:nth-child(n+16) { /* Hide particles beyond 15 on mobile */
+                display: none;
+            }
+        }
+
+        /* Touch-friendly form elements and interactive areas */
+        .contact-item, .skill-category, .project-card {
+            cursor: pointer;
+            -webkit-tap-highlight-color: rgba(102, 126, 234, 0.2); /* Custom tap highlight */
+        }
+
+        /* Improve mobile readability */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            p, li {
+                font-size: 1rem;
+                line-height: 1.6; /* Better mobile reading */
+            }
+        }
+
+        /* Mobile-specific dark mode adjustments */
+        @media (max-width: 768px) {
+            [data-theme="dark"] .glass-card {
+                backdrop-filter: blur(12px); /* Less intensive on mobile */
+                background: rgba(15, 23, 42, 0.3);
+            }
+        }
     </style>
 </head>
 <body data-theme="light">
