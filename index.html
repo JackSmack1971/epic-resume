@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elias Vaughn - Interactive Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #667eea;
+            --primary-dark: #5a6fd8;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --text-primary: #1a202c;
+            --text-secondary: #4a5568;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f7fafc;
+            --bg-glass: rgba(255, 255, 255, 0.25);
+            --border-glass: rgba(255, 255, 255, 0.18);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f7fafc;
+            --text-secondary: #e2e8f0;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-glass: rgba(15, 23, 42, 0.25);
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            gap: 1rem;
+            backdrop-filter: blur(16px);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 2rem;
+            padding: 0.75rem 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-glass);
+            transform: scale(1.1);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--primary);
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg) scale(1.1);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 2rem;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            transform-style: preserve-3d;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.5);
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .name {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.8)); }
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.5s forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1rem;
+            padding: 1rem;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-header::before {
+            content: '';
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-category:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 4px;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: fillBar 2s ease-out 1s forwards;
+        }
+
+        @keyframes fillBar {
+            to { transform: scaleX(1); }
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-left: 2rem;
+            transition: var(--transition);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--bg-primary);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--primary);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow);
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-company {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .job-period {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .job-achievements {
+            list-style: none;
+        }
+
+        .job-achievements li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .job-achievements li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        /* Project Cards */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: var(--shadow);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Education Cards */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .education-card:hover {
+            transform: translateY(-10px) rotateX(10deg);
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .institution {
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Certifications */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .cert-badge {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem;
+            border-radius: 1rem;
+            text-align: center;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .cert-badge:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow);
+        }
+
+        /* Floating Action Button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .fab:hover {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .glass-card {
+                padding: 2rem;
+                border-radius: 1.5rem;
+            }
+            
+            .nav {
+                top: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+            }
+            
+            .timeline {
+                padding-left: 1rem;
+            }
+            
+            .timeline-item {
+                margin-left: 1rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .nav, .fab, .particles, .theme-toggle {
+                display: none !important;
+            }
+            
+            .glass-card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                break-inside: avoid;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--bg-secondary);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <button class="nav-btn" onclick="scrollToSection('header')" title="Home">🏠</button>
+        <button class="nav-btn" onclick="scrollToSection('experience')" title="Experience">💼</button>
+        <button class="nav-btn" onclick="scrollToSection('skills')" title="Skills">⚡</button>
+        <button class="nav-btn" onclick="scrollToSection('projects')" title="Projects">🚀</button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme" id="themeToggle">🌙</button>
+    </nav>
+
+    <div class="container">
+        <!-- Header Section -->
+        <section id="header" class="glass-card fade-in">
+            <div class="header">
+                <h1 class="name">Elias Vaughn</h1>
+                <p class="title">Neurostrategy Executive | Cognitive Warfare Expert | Geopolitical Risk Analyst</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <strong>📧 Email</strong><br>
+                        [Confidential]
+                    </div>
+                    <div class="contact-item">
+                        <strong>📱 Phone</strong><br>
+                        [Confidential]
+                    </div>
+                    <div class="contact-item">
+                        <strong>🌍 Location</strong><br>
+                        Global (Remote & International)
+                    </div>
+                    <div class="contact-item">
+                        <strong>💼 LinkedIn</strong><br>
+                        [Confidential]
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Summary -->
+        <section class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Professional Summary</h2>
+            </div>
+            <p style="font-size: 1.1rem; line-height: 1.8; text-align: justify;">
+                Visionary Neurostrategy Executive with 10+ years of experience in geopolitical analysis, AI (Artificial Intelligence) governance, and cognitive influence operations. Proven ability to lead high-stakes initiatives that align technology, policy, and public narrative with strategic objectives. Specialized in building predictive models, influencing policy through symbolic diplomacy, and deploying AI-integrated cognitive warfare frameworks. Adept in cross-functional leadership, international collaboration, and scalable strategy development across public, private, and defense sectors. Track record of managing $600B+ market impact initiatives and 100+ country policy implementations.
+            </p>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Core Competencies</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Strategic Operations</h3>
+                    <div class="skill-item">
+                        Strategic Narrative Design
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.2s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        AI Governance & Regulation
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.4s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Cognitive Warfare Systems
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.6s;"></div></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Intelligence & Analysis</h3>
+                    <div class="skill-item">
+                        Geopolitical Risk Analysis
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 0.8s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Predictive Intelligence Modeling
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.0s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Memetic Engineering
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.2s;"></div></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Technology & Innovation</h3>
+                    <div class="skill-item">
+                        Machine Learning & Algorithmic Analysis
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.4s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Quantum Decision Architectures
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.6s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Information Warfare Strategy
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 1.8s;"></div></div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">International Relations</h3>
+                    <div class="skill-item">
+                        NATO Relations
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.0s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        WHO Policy Development
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.2s;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        Cultural Symbolism & Public Diplomacy
+                        <div class="skill-bar"><div class="skill-progress" style="animation-delay: 2.4s;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience -->
+        <section id="experience" class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="job-title">Chief Neurostrategy Advisor</div>
+                    <div class="job-company">Confidential Strategic Directorate</div>
+                    <div class="job-period">Jan 2021 – Present | Remote Operations</div>
+                    <ul class="job-achievements">
+                        <li>Advised national security agencies on AI (Artificial Intelligence) ethics, trade conflict escalation, and narrative warfare, impacting policy decisions across 15+ government departments.</li>
+                        <li>Directed initiatives around U.S. policy influence, including withdrawal from WHO (World Health Organization) and global climate repositioning, affecting international relations with 50+ countries.</li>
+                        <li>Supported AI Action Summit implementation with integrated neuroethical frameworks, coordinating with 100+ countries and achieving 95% policy alignment.</li>
+                        <li>Influenced economic perception during key market events, including Meta's AI data center expansion and Nvidia valuation crisis, mitigating potential $600B market impact through strategic narrative management.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">Director, Cognitive Influence Operations</div>
+                    <div class="job-company">Global Information Engineering Consortium</div>
+                    <div class="job-period">Jul 2018 – Dec 2020 | London, UK</div>
+                    <ul class="job-achievements">
+                        <li>Led global memetic stability programs impacting narrative alignment in NATO (North Atlantic Treaty Organization)-aligned states, managing operations across 28 member countries.</li>
+                        <li>Developed semantic saturation tools used to mitigate ideological volatility in unstable regions, reducing conflict indicators by 35% across 12 target areas.</li>
+                        <li>Initiated bilateral narrative diplomacy strategies for conflict resolution in symbolic cultural exchanges, achieving 80% success rate in de-escalation initiatives.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="job-title">Senior Strategic Analyst – AI & Geopolitics</div>
+                    <div class="job-company">International Council on Future Intelligence</div>
+                    <div class="job-period">Aug 2014 – Jun 2018 | Geneva, Switzerland</div>
+                    <ul class="job-achievements">
+                        <li>Constructed macro-models for AI (Artificial Intelligence) influence in political systems and public belief structures, analyzing data from 40+ countries with 92% predictive accuracy.</li>
+                        <li>Conducted scenario planning sessions for national think tanks on algorithmic truth and perception wars, delivering 50+ strategic briefings to government officials.</li>
+                        <li>Served as a subject-matter expert on cognitive sovereignty and semiotic statecraft, contributing to 25+ policy white papers and strategic frameworks.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+            </div>
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="degree">Doctorate (DSc) in Cognitive Systems Strategy</div>
+                    <div class="institution">Confidential Defense Research University</div>
+                    <div style="color: var(--text-secondary); margin-top: 1rem;">Completed: 2014</div>
+                </div>
+                <div class="education-card">
+                    <div class="degree">MSc, Strategic Intelligence & Neurodynamics</div>
+                    <div class="institution">International Institute of Psychohistorical Studies</div>
+                    <div style="color: var(--text-secondary); margin-top: 1rem;">Completed: 2011</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            <div class="cert-grid">
+                <div class="cert-badge">🤖 Certified AI Ethics Architect (EU AI Act Compliant)</div>
+                <div class="cert-badge">⚛️ Quantum Risk Decision Specialist</div>
+                <div class="cert-badge">🎯 Strategic Narrative Warfare Professional (SNWP)</div>
+            </div>
+        </section>
+
+        <!-- Projects & Recognition -->
+        <section id="projects" class="glass-card fade-in">
+            <div class="section-header">
+                <h2 class="section-title">Key Projects & Recognition</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-title">🇫🇷 AI Action Summit France (2025)</div>
+                    <p>Led neuroethical policy structuring across 100+ countries, achieving 95% consensus on AI governance frameworks. Coordinated multilateral negotiations and implemented comprehensive ethical guidelines for artificial intelligence deployment in governmental systems.</p>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-title">🚀 DeepSeek AI Event (2025)</div>
+                    <p>Managed global narrative response to China's AI (Artificial Intelligence) disruption, mitigating $600B market impact and stabilizing international technology markets within 72 hours. Developed rapid-response protocols for future AI-related market disruptions.</p>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-title">🗽 Statue of Liberty Diplomacy Strategy (2025)</div>
+                    <p>Consulted on symbolic heritage negotiations to reframe national value alignment narratives, improving diplomatic relations with 25+ nations. Implemented cultural symbolism frameworks for international relationship enhancement.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" onclick="scrollToTop()" title="Back to Top">↑</button>
+
+    <script>
+        // Initialize particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Theme toggle functionality
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = body.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Intersection Observer for fade-in animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Loading screen
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            setTimeout(() => {
+                loading.classList.add('hidden');
+            }, 1000);
+        }
+
+        // Parallax effect for glass cards
+        function initParallax() {
+            document.addEventListener('mousemove', (e) => {
+                const cards = document.querySelectorAll('.glass-card');
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+
+                cards.forEach((card, index) => {
+                    const intensity = (index + 1) * 0.5;
+                    const rotateX = (y - 0.5) * intensity;
+                    const rotateY = (x - 0.5) * intensity;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1':
+                        scrollToSection('header');
+                        break;
+                    case '2':
+                        scrollToSection('experience');
+                        break;
+                    case '3':
+                        scrollToSection('skills');
+                        break;
+                    case '4':
+                        scrollToSection('projects');
+                        break;
+                    case 't':
+                        toggleTheme();
+                        break;
+                }
+            }
+        });
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            initScrollAnimations();
+            initParallax();
+            hideLoading();
+            
+            // Add some random delays to skill bar animations
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach((bar, index) => {
+                bar.style.animationDelay = (index * 0.2 + 1) + 's';
+            });
+        });
+
+        // Enhanced hover effects
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Print functionality
+        function printResume() {
+            window.print();
+        }
+
+        // Add print button functionality to FAB on long press
+        let pressTimer;
+        document.querySelector('.fab').addEventListener('mousedown', function() {
+            pressTimer = setTimeout(() => printResume(), 1000);
+        });
+
+        document.querySelector('.fab').addEventListener('mouseup', function() {
+            clearTimeout(pressTimer);
+        });
+
+        // Performance optimization: Reduce animations on slower devices
+        if (navigator.hardwareConcurrency <= 2) {
+            document.documentElement.style.setProperty('--transition', 'all 0.2s ease');
+        }
+    </script>
+</body>
+</html>
