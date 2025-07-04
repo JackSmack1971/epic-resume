@@ -109,13 +109,6 @@
   [headers.values]
     Cache-Control = "public, max-age=86400"
 
-# API routes (if added in future)
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Content-Type = "application/json"
-
 # Error page redirects
 [[redirects]]
   from = "/404"
@@ -164,21 +157,19 @@
 [context.dev]
   command = "npm run dev"
 
+# Functions directory (for future serverless functions)
+[functions]
+  directory = "netlify/functions"
+
+# REMOVED: Edge functions section that was causing the syntax error
+# Edge functions can be added later when needed with proper syntax:
+# [[edge_functions]]
+#   path = "/api/*"
+#   function = "api-handler"
+
 # Custom domain configuration (uncomment when ready)
 # [[redirects]]
 #   from = "https://www.eliusvaughn.com/*"
 #   to = "https://eliusvaughn.com/:splat"
 #   status = 301
 #   force = true
-
-# Form handling (if contact forms are added later)
-# [forms]
-#   "/contact" = { name = "contact" }
-
-# Functions directory (for future serverless functions)
-[functions]
-  directory = "netlify/functions"
-  
-# Edge functions (for advanced performance optimizations)
-[edge_functions]
-  directory = "netlify/edge-functions"
