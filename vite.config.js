@@ -234,4 +234,67 @@ export default defineConfig({
     })
   ],
   
-  // Optimization
+  // Optimization configuration
+  optimizeDeps: {
+    // Include dependencies that should be pre-bundled
+    include: [
+      'vite-plugin-pwa'
+    ],
+    
+    // Exclude dependencies from pre-bundling
+    exclude: [],
+    
+    // Force optimization of certain dependencies
+    force: false
+  },
+  
+  // Environment variables
+  define: {
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version || '2.0.0'),
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+    __PROD__: JSON.stringify(process.env.NODE_ENV === 'production')
+  },
+  
+  // ESBuild configuration
+  esbuild: {
+    // Target ES2020 for modern browsers
+    target: 'es2020',
+    
+    // Drop console and debugger in production
+    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : [],
+    
+    // JSX configuration (if needed in future)
+    jsxFactory: 'h',
+    jsxFragment: 'Fragment'
+  },
+  
+  // Worker configuration
+  worker: {
+    format: 'es',
+    plugins: []
+  },
+  
+  // JSON configuration
+  json: {
+    namedExports: true,
+    stringify: false
+  },
+  
+  // Environment handling
+  envPrefix: ['VITE_', 'EPIC_RESUME_'],
+  
+  // Logging configuration
+  logLevel: 'info',
+  clearScreen: true,
+  
+  // Experimental features
+  experimental: {
+    renderBuiltUrl: (filename, { hostType }) => {
+      if (hostType === 'js') {
+        return { js: `/${filename}` };
+      } else {
+        return { relative: true };
+      }
+    }
+  }
+});
