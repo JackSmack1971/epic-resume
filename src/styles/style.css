@@ -3,8 +3,8 @@
             --primary-dark: #5a6fd8;
             --secondary: #764ba2;
             --accent: #f093fb;
-            --text-primary: #1a202c;
-            --text-secondary: #4a5568;
+            --text-primary: #2d2d2d;
+            --text-secondary: #333333;
             --bg-primary: #ffffff;
             --bg-secondary: #f7fafc;
             --bg-glass: rgba(255, 255, 255, 0.25);
@@ -30,19 +30,31 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: var(--bg-secondary);
             min-height: 100vh;
             color: var(--text-primary);
             overflow-x: hidden;
             transition: var(--transition);
+            position: relative;
         }
 
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* Animated Gradient Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: 0;
         }
 
         /* Animated Background Particles */
@@ -1165,11 +1177,12 @@
         }
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background: var(--bg-secondary);
   min-height: 100vh;
-  color: #1a202c;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  transition: var(--transition);
+  position: relative;
 }
 
 @keyframes gradientBG {
