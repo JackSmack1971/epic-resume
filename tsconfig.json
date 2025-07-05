@@ -29,7 +29,8 @@
   },
   "include": [
     "src/**/*",
-    "tests/**/*"
+    "tests/**/*",
+    "vite.config.ts"
   ],
   "exclude": [
     "dist",
